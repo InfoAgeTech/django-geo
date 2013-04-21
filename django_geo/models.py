@@ -19,26 +19,42 @@ class Location(models.Model):
     :param source: the source of where the location information was retrieved.
         
     """
-    name = models.CharField(max_length=100, required=False,
+    name = models.CharField(max_length=100,
+                            blank=True,
+                            null=True,
                             verbose_name=_('Name'))
-    line1 = models.CharField(max_length=100, required=False,
+    line1 = models.CharField(max_length=100,
+                             blank=True,
+                             null=True,
                              verbose_name=_('Address Line 1'))
-    line2 = models.CharField(max_length=100, required=False,
+    line2 = models.CharField(max_length=100,
+                             blank=True,
+                             null=True,
                              verbose_name=_('Address Line 2'))
-    locality = models.CharField(max_length=100, required=False,
+    locality = models.CharField(max_length=100,
+                                blank=True,
+                                null=True,
                                 verbose_name=_('City'))
-    subdivision = models.CharField(max_length=100, required=False,
+    subdivision = models.CharField(max_length=100,
+                                   blank=True,
+                                   null=True,
                                    verbose_name=_('State'))
-    country = models.CharField(max_length=100, required=False,
+    country = models.CharField(max_length=100,
+                               blank=True,
+                               null=True,
                                verbose_name=_('Country'))
-    postal_code = models.CharField(max_length=100, required=False,
+    postal_code = models.CharField(max_length=100,
+                                   blank=True,
+                                   null=True,
                                    verbose_name=_('Zip Code'))
-    phone = models.CharField(regex=r'^([0-9\(\)\/\+\-]*)', required=False,
+    phone = models.CharField(max_length=30,
+                             blank=True,
+                             null=True,
                              verbose_name=_('Phone'))
-    latlong = PointField(required=False)
+    latlong = PointField(blank=True, null=True)
     # TODO: is this needed for this model?
-    category = models.CharField(required=False)
-    source = models.CharField(default='OTHER')
+    category = models.CharField(max_length=100, blank=True, null=True)
+    source = models.CharField(max_length=50, default='OTHER')
 
 
     def __init__(self, latitude=None, longitude=None, *args, **kwargs):
