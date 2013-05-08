@@ -14,6 +14,7 @@ env:
   - DJANGO_VERSION=1.5.1
 install:
   - pip install -q Django==$DJANGO_VERSION
+  - pip install django_nose
   - python setup.py -q install
 # command to run tests
 script:
