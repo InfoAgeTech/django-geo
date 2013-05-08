@@ -85,11 +85,11 @@ class Location(models.Model):
 
         city_state_zip = ''
 
-        if self.subdivision and 'subdivision' not in exclude_fields:
-            city_state_zip += self.subdivision
-
         if self.locality and 'locality' not in exclude_fields:
-            city_state_zip += u', {0}'.format(self.locality) if city_state_zip else self.locality
+            city_state_zip += self.locality
+
+        if self.subdivision and 'subdivision' not in exclude_fields:
+            city_state_zip += u', {0}'.format(self.subdivision) if city_state_zip else self.subdivision
 
         if self.postal_code and 'postal_code' not in exclude_fields:
             city_state_zip += u', {0}'.format(self.postal_code) if city_state_zip else self.postal_code

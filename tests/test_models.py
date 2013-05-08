@@ -45,3 +45,29 @@ class NotificationManagerTests(TestCase):
         self.assertEqual(ext_source, loc.ext_source)
         self.assertEqual(ext_id, loc.ext_id)
         self.assertEqual(category, loc.category)
+
+    def test_get_display(self):
+        """Tests the inline address formatting."""
+        name = 'My Building'
+        line1 = '1234 N. Street'
+        line2 = 'This building rocks'
+        locality = 'Denver'
+        subdivision = 'CO'
+        country = 'USA'
+        postal_code = '12345'
+        phone = '(123)-123-1234'
+        loc = Location.objects.create(name=name,
+                                      line1=line1,
+                                      line2=line2,
+                                      locality=locality,
+                                      subdivision=subdivision,
+                                      country=country,
+                                      postal_code=postal_code,
+                                      phone=phone)
+
+        self.assertEqual(loc.get_display(),
+                         'My Building, 1234 N. Street, '
+                         'This building rocks, '
+                         'Denver, CO, 12345, USA, (123)-123-1234')
+
+
