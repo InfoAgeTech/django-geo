@@ -6,8 +6,6 @@ python:
   - "3.3"
 # command to install dependencies
 install: "pip install -r requirements.txt --use-mirrors"
-# command to run tests
-script: nosetests
 branches:
   only:
     - master
@@ -17,3 +15,6 @@ env:
 install:
   - pip install -q Django==$DJANGO_VERSION
   - python setup.py -q install
+# command to run tests
+script:
+  - python manage.py test
