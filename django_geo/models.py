@@ -1,23 +1,21 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.utils.translation import ugettext as _
-from django.contrib.gis.db.models.fields import PointField
-from django.contrib.gis.geos.point import Point
+from django_geo.managers import LocationManager
 
 
 class Location(models.Model):
-    """
-    Represents a location object.
+    """Represents a location object.
     
     :param name: the name of the location.
     :param locality: city
     :param subdivision: state
     :param postal_code: zip_code
-    :param latlong: tuple or list of latitude and longitute values. 
-        Example: [latitude, longitude] or [38.9401, -94.6807]
+    :param latitude: latitude of the location
+    :param longitude: longitude of the location
+    :param ext_source: source of the location information
+    :param ext_id: unique identifier for the source of the location information.
     :param category: category (type) of places this is.
-    :param source: the source of where the location information was retrieved.
-        
     """
     name = models.CharField(max_length=100,
                             blank=True,
@@ -51,22 +49,23 @@ class Location(models.Model):
                              blank=True,
                              null=True,
                              verbose_name=_('Phone'))
-    latlong = PointField(blank=True, null=True)
-    # TODO: is this needed for this model?
+    latitude = models.DecimalField(max_digits=10,
+                                   decimal_places=5,
+                                   blank=True,
+                                   null=True)
+    longitude = models.DecimalField(max_digits=10,
+                                    decimal_places=5,
+                                    blank=True,
+                                    null=True)
+    ext_source = models.CharField(max_length=50, blank=True, null=True)
+    ext_id = models.CharField(max_length=50, blank=True, null=True)
+    # TODO: is this needed for this model? Restaurant, bar, fitness, etc.
     category = models.CharField(max_length=100, blank=True, null=True)
-    source = models.CharField(max_length=50, default='OTHER')
+    objects = LocationManager()
 
-
-    def __init__(self, latitude=None, longitude=None, *args, **kwargs):
-        super(Location, self).__init__(*args, **kwargs)
-
-        if not self.latlong and latitude and longitude:
-            # Might not be the right "Point" datatype
-            self.latlong = Point(latitude, longitude)
 
     def get_display(self, exclude_fields=None):
-        """
-        Gets the non-html inline location. 
+        """Gets the non-html inline location. 
         
         :param exclude_fields: a list of tuple of fields to ignore.  This can
             be any field name on the location object.
@@ -74,15 +73,15 @@ class Location(models.Model):
         if not exclude_fields:
             exclude_fields = []
 
-        html = u''
+        text = u''
         if self.name and 'name' not in exclude_fields:
-            html += u'{0}'.format(self.name)
+            text += u'{0}'.format(self.name)
 
         if self.line1 and 'line1' not in exclude_fields:
-            html += u', {0}'.format(self.line1)
+            text += u', {0}'.format(self.line1)
 
         if self.line2 and 'line2' not in exclude_fields:
-            html += u', {0}'.format(self.line2)
+            text += u', {0}'.format(self.line2)
 
         city_state_zip = ''
 
@@ -96,12 +95,12 @@ class Location(models.Model):
             city_state_zip += u', {0}'.format(self.postal_code) if city_state_zip else self.postal_code
 
         if city_state_zip:
-            html += u', {0}'.format(city_state_zip)
+            text += u', {0}'.format(city_state_zip)
 
         if self.country and 'country' not in exclude_fields:
-            html += u', {0}'.format(self.country)
+            text += u', {0}'.format(self.country)
 
         if self.phone and 'phone' not in exclude_fields:
-            html += u', {0}'.format(self.phone)
+            text += u', {0}'.format(self.phone)
 
-        return html
+        return text
