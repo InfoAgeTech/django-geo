@@ -3,6 +3,13 @@ NOTE: This is not stable yet and will likely change!  Please don't use in produc
 ==========
 django-geo
 ==========
+:Info: django-geo is a python geo module written for django.
+:Repository: https://github.com/troygrosfield/django-geo
+:Author: Troy Grosfield (http://github.com/troygrosfield)
+:Maintainer: Troy Grosfield (http://github.com/troygrosfield)
+
+.. image:: https://secure.travis-ci.org/MongoEngine/mongoengine.png?branch=master
+  :target: http://travis-ci.org/MongoEngine/mongoengine
 
 About
 =====
