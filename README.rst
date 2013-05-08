@@ -8,8 +8,8 @@ django-geo
 :Author: Troy Grosfield (http://github.com/troygrosfield)
 :Maintainer: Troy Grosfield (http://github.com/troygrosfield)
 
-.. image:: https://secure.travis-ci.org/MongoEngine/mongoengine.png?branch=master
-  :target: http://travis-ci.org/MongoEngine/mongoengine
+.. image:: https://travis-ci.org/troygrosfield/django-geo.png?branch=master
+  :target: http://travis-ci.org/troygrosfield/django-geo
 
 About
 =====
