@@ -18,7 +18,7 @@ setup(
     # long_description=open('README.md').read(),
     author='Troy Grosfield',
     author_email='troy.grosfield@gmail.com',
-    url='https://github.com/troygrosfield/django-geo',
+    url='https://github.com/InfoAgeTech/django-geo',
     # license='MIT',
     packages=find_packages(),
     include_package_data=True,
