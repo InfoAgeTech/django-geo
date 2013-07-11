@@ -12,7 +12,9 @@ Build Status
 
 Intallation
 ===========
-Download the source from Github and run ``python setup.py install``.
+Download the source from Github and run::
+
+   python setup.py install
 
 Dependencies
 ============
