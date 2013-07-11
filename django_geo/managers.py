@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.contrib.gis.db import models
+from django.db import models
 
 
-class LocationManager(models.GeoManager):
+class LocationManager(models.Manager):
 
     def create(self, latitude=None, longitude=None, **kwargs):
 
