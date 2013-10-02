@@ -6,7 +6,7 @@ from django_geo.managers import LocationManager
 
 class Location(models.Model):
     """Represents a location object.
-    
+
     :param name: the name of the location.
     :param locality: city
     :param subdivision: state
@@ -63,10 +63,14 @@ class Location(models.Model):
     category = models.CharField(max_length=100, blank=True, null=True)
     objects = LocationManager()
 
+    def __unicode__(self):
+        if self.category:
+            return u'{0} ({1})'.format(self.name, self.category)
+        return self.name
 
     def get_display(self, exclude_fields=None):
-        """Gets the non-html inline location. 
-        
+        """Gets the non-html inline location.
+
         :param exclude_fields: a list of tuple of fields to ignore.  This can
             be any field name on the location object.
         """
