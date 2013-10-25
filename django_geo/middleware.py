@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from django.utils import timezone
+from django.utils.timezone import localtime
+from django.utils.timezone import utc
 
 
 class TimezoneMiddleware(object):
@@ -16,3 +19,9 @@ class TimezoneMiddleware(object):
             timezone.activate(tz)
         else:
             timezone.deactivate()
+
+        # Add datetime info the the request. So date/time can be put in context
+        # of the user.
+        user_datetime = localtime(datetime.utcnow().replace(tzinfo=utc))
+        request.user_date = user_datetime.date()
+        request.user_datetime = user_datetime
