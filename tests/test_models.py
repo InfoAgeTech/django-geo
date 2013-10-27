@@ -16,7 +16,7 @@ class NotificationManagerTests(TestCase):
         phone = '(123)-123-1234'
         latitude = -123.42342
         longitude = 34.9876
-        ext_source = 'awesomelatandlong.com'
+        source = 'awesomelatandlong.com'
         ext_id = '4321'
         category = 'Food'
         loc = Location.objects.create(latitude=latitude,
@@ -29,7 +29,7 @@ class NotificationManagerTests(TestCase):
                                       country=country,
                                       postal_code=postal_code,
                                       phone=phone,
-                                      ext_source=ext_source,
+                                      source=source,
                                       ext_id=ext_id,
                                       category=category)
         self.assertEqual(name, loc.name)
@@ -42,7 +42,7 @@ class NotificationManagerTests(TestCase):
         self.assertEqual(phone, loc.phone)
         self.assertEqual(latitude, loc.latitude)
         self.assertEqual(longitude, loc.longitude)
-        self.assertEqual(ext_source, loc.ext_source)
+        self.assertEqual(source, loc.source)
         self.assertEqual(ext_id, loc.ext_id)
         self.assertEqual(category, loc.category)
 

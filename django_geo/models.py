@@ -13,7 +13,7 @@ class Location(models.Model):
     :param postal_code: zip_code
     :param latitude: latitude of the location
     :param longitude: longitude of the location
-    :param ext_source: source of the location information
+    :param source: source of the location information
     :param ext_id: unique identifier for the source of the location information.
     :param category: category (type) of places this is.
     """
@@ -57,11 +57,14 @@ class Location(models.Model):
                                     decimal_places=5,
                                     blank=True,
                                     null=True)
-    ext_source = models.CharField(max_length=50, blank=True, null=True)
+    source = models.CharField(max_length=50, blank=True, null=True)
     ext_id = models.CharField(max_length=50, blank=True, null=True)
     # TODO: is this needed for this model? Restaurant, bar, fitness, etc.
     category = models.CharField(max_length=100, blank=True, null=True)
     objects = LocationManager()
+
+    class Meta:
+        index_together = (('ext_id', 'source'),)
 
     def __unicode__(self):
         if self.category:
