@@ -10,7 +10,7 @@ env:
   - DJANGO_VERSION=1.6
 install:
   - pip install -r requirements.txt --use-mirrors
-  - pip install -q Django==$DJANGO
+  - pip install -q Django==$DJANGO_VERSION
   - pip install django_nose
   - python setup.py -q install
 # command to run tests
