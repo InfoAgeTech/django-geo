@@ -2,6 +2,7 @@
 from datetime import datetime
 from django.utils import timezone
 from django.utils.timezone import localtime
+from django.utils.timezone import pytz
 from django.utils.timezone import utc
 
 
@@ -16,7 +17,10 @@ class TimezoneMiddleware(object):
         tz = request.session.get('user_timezone')
 
         if tz:
-            timezone.activate(tz)
+            try:
+                timezone.activate(pytz.timezone(tz))
+            except:
+                timezone.deactivate()
         else:
             timezone.deactivate()
 
