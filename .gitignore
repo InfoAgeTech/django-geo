@@ -1,6 +1,7 @@
 .project
 .pydevproject
 .DS_Store
-.settings/
+.settings
+.idea
 *.pyc
 *.db
