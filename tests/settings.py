@@ -17,7 +17,6 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django_geo',
-    'django_nose',
 )
 
 MIDDLEWARE_CLASSES = (
